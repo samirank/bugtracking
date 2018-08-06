@@ -12,9 +12,9 @@
  */
 class dbconnect extends mysqli {
   protected $DBLOCATION = "localhost";
-  protected $DBUSER     = "bts_samiran";
-  protected $DBPASS     = "pMsSodmG9fzc6KLL";
-  protected $DBNAME     = "bts_samiran";
+  protected $DBUSER     = "blurhync_bts";
+  protected $DBPASS     = "XRfuE,JIvW8)";
+  protected $DBNAME     = "blurhync_bts";
   protected $mysqli;
   function __construct() {
     $this->mysqli = new mysqli($this->DBLOCATION, $this->DBUSER, $this->DBPASS, $this->DBNAME);

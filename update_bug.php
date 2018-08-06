@@ -40,7 +40,7 @@ if($err==1){
 
     <div class="form-group row required">
       <div class="col-sm-1"></div>
-      <label for="inputModId" class="col-sm-2 col-form-label"> Select Module</label>
+      <label for="inputModId" class="col-sm-2 col-form-label">Select Module</label>
       <div class="col-sm-6">
         <select <?php if($mod_id){echo "disabled";} ?> class="form-control" id="inputModId" name="inputModId" data-validation="required" data-validation-error-msg="Please select and option.">
         <option disabled selected value="">Select</option>

@@ -226,3 +226,7 @@ p {
 .login-help{
   font-size: 12px;
 }
+
+.content-wrapper{
+  min-height: 100%;
+}

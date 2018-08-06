@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
   $bugTester        = $_SESSION['login_emp_id'];
 
   //check if the file is an image
-  $check            = getimagesize($_FILES["inputFile"]["tmp_name"]);
+  $check = getimagesize($_FILES["inputFile"]["tmp_name"]);
   if ($check !== false) {
     echo "File is an image - " . $check["mime"] . ".";
     $uploadOk = 1;

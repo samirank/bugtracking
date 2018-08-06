@@ -15,7 +15,7 @@ class validate {
   /*
    function to set connection string*/
   private function mysqli() {
-    if($mysqli = new mysqli('localhost', 'bts_samiran', 'pMsSodmG9fzc6KLL', 'bts_samiran'))
+    if($mysqli = new mysqli('localhost', 'blurhync_bts', 'XRfuE,JIvW8)', 'blurhync_bts'))
       return $mysqli;
     else
       die($mysqli->error);

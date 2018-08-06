@@ -14,7 +14,8 @@ if($err==1){
 <html>
 <head>
   <title>Bug tracking system</title>
-
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap core CSS -->
     <link href="sb_admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
