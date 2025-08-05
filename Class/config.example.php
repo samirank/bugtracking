@@ -1,20 +1,20 @@
 <?php
 /**
- * Database Configuration
+ * Database Configuration Example
  * 
- * IMPORTANT: Update these credentials with your actual database details
- * For security, consider using environment variables in production
+ * Copy this file to config.php and update the values according to your environment.
+ * Never commit the actual config.php file with real credentials to version control.
  */
 
 /**
  * Database connection class with improved security and error handling
  */
 class DatabaseConnection extends mysqli {
-    // Database configuration - Update these values for your environment
+    // Database configuration - Update these values
     protected $DBLOCATION = "localhost";
-    protected $DBUSER     = "your_username";  // Change this
-    protected $DBPASS     = "your_password";  // Change this
-    protected $DBNAME     = "your_database";  // Change this
+    protected $DBUSER     = "your_username";
+    protected $DBPASS     = "your_password";
+    protected $DBNAME     = "your_database";
     protected $DBPORT     = 3306;
     protected $DBCHARSET  = "utf8mb4";
     
@@ -107,7 +107,7 @@ date_default_timezone_set('UTC');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Session configuration for security
+// Session configuration
 ini_set('session.cookie_httponly', 1);
 ini_set('session.use_only_cookies', 1);
 ini_set('session.cookie_secure', 1);
