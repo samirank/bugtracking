@@ -5,8 +5,8 @@
  * Authenticates users and manages login sessions
  */
 
-require_once '../Class/config.php';
-require_once '../Class/Utilities.php';
+require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Class' . DIRECTORY_SEPARATOR . 'config.php';
+require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Class' . DIRECTORY_SEPARATOR . 'Utilities.php';
 
 // Start session
 session_start();
@@ -20,10 +20,10 @@ if (!isset($_POST['submit'])) {
 
 // Get and sanitize input
 $username = Utilities::sanitizeInput($_POST['uname'] ?? '');
-$password_hash = $_POST['enc'] ?? '';
+$password = $_POST['pass'] ?? ''; // Get plain password for server-side verification
 
 // Validate input
-if (empty($username) || empty($password_hash)) {
+if (empty($username) || empty($password)) {
     $_SESSION['err'] = 'Username and password are required';
     header("location: ../index.php");
     exit();
@@ -43,8 +43,8 @@ try {
     if ($result->num_rows === 1) {
         $user = $result->fetch_assoc();
         
-        // Verify password
-        if ($user['password'] === $password_hash) {
+        // Verify password using secure comparison
+        if (Utilities::verifyPassword($password, $user['password'])) {
             // Set session variables
             $_SESSION['login_user_id'] = $user['id'];
             $_SESSION['login_username'] = $user['username'];

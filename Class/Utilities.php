@@ -47,7 +47,8 @@ class Utilities {
      * @return string Hashed password
      */
     public static function hashPassword($password) {
-        return hash('sha256', $password);
+        // Use PASSWORD_DEFAULT for forward compatibility (bcrypt/argon2id)
+        return password_hash($password, PASSWORD_DEFAULT);
     }
     
     /**
@@ -58,7 +59,7 @@ class Utilities {
      * @return bool True if match, false otherwise
      */
     public static function verifyPassword($password, $hash) {
-        return self::hashPassword($password) === $hash;
+        return password_verify($password, $hash);
     }
     
     /**

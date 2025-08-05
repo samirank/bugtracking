@@ -5,6 +5,9 @@
  * Main entry point for the application
  */
 
+// Load configuration
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'Class' . DIRECTORY_SEPARATOR . 'config.php';
+
 // Start session with secure settings
 session_start();
 
@@ -162,8 +165,7 @@ $page_title = APP_NAME . ' - Login';
                             <input type="password" class="form-control" id="password" name="pass" 
                                    placeholder="Enter your password" required>
                         </div>
-                        <input type="hidden" name="enc" id="enc" value="">
-                        <button type="submit" class="btn btn-primary btn-block" onclick="return encryptPassword();">
+                        <button type="submit" class="btn btn-primary btn-block">
                             <i class="fa fa-sign-in"></i> Sign In
                         </button>
                     </form>
@@ -206,23 +208,6 @@ $page_title = APP_NAME . ' - Login';
     <script src="sb_admin/js/aes.js"></script>
     
     <script>
-        /**
-         * Encrypt password before form submission
-         * Note: This is a basic implementation. Consider using HTTPS and server-side hashing for production.
-         */
-        function encryptPassword() {
-            var password = document.getElementById("password").value;
-            if (password.trim() === '') {
-                alert('Please enter a password');
-                return false;
-            }
-            
-            // Use SHA-256 instead of MD5 for better security
-            var hash = CryptoJS.SHA256(password);
-            document.getElementById('enc').value = hash;
-            return true;
-        }
-        
         // Auto-focus username field when modal opens
         $('#login-modal').on('shown.bs.modal', function () {
             $('#username').focus();

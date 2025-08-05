@@ -5,7 +5,7 @@
  * Provides real-time statistics for the dashboard
  */
 
-require_once '../Class/config.php';
+require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Class' . DIRECTORY_SEPARATOR . 'config.php';
 
 /**
  * Get total number of active bugs

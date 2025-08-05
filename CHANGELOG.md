@@ -10,7 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Comprehensive README.md with installation instructions and feature overview
 - Database schema file (`database/schema.sql`) with complete table structure
-- Configuration example file (`Class/config.example.php`) for secure setup
+- Environment configuration system with `example.env` and `Class/Environment.php`
+- Interactive setup script (`setup.php`) for easy configuration
 - Utilities class (`Class/Utilities.php`) with common helper functions
 - Security documentation (`security.md`) with best practices
 - Composer.json for dependency management
@@ -20,11 +21,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - **Security Improvements**:
-  - Replaced MD5 with SHA-256 for password hashing
+  - Replaced MD5 with secure password_hash() using PASSWORD_DEFAULT
   - Implemented proper input sanitization and validation
   - Added prepared statements for all database queries
   - Enhanced session security configuration
   - Improved error handling without exposing sensitive information
+  - Removed client-side password hashing for better security
+  - Added environment-based configuration management
 
 - **Code Quality Improvements**:
   - Refactored database connection class with better error handling

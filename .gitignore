@@ -4,6 +4,7 @@
 Class/config.php
 .env
 *.env
+!example.env
 
 # Uploaded files
 uploads/*

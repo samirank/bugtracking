@@ -50,25 +50,48 @@ git clone <repository-url>
 cd bug-tracking-system
 ```
 
-### 2. Database Setup
-1. Create a new MySQL database
-2. Import the database schema (see `database/schema.sql`)
-3. Update database configuration in `Class/config.php`
+### 2. Quick Setup (Recommended)
+Run the interactive setup script:
+```bash
+php setup.php
+```
+This will guide you through the configuration process and create the necessary files.
 
-### 3. Configuration
-1. Copy `Class/config.example.php` to `Class/config.php`
-2. Update database credentials:
-```php
-protected $DBLOCATION = "localhost";
-protected $DBUSER     = "your_username";
-protected $DBPASS     = "your_password";
-protected $DBNAME     = "your_database";
+### 3. Manual Setup
+
+#### Database Setup
+1. Create a new MySQL database
+2. Import the database schema:
+```bash
+mysql -u your_username -p your_database < database/schema.sql
+```
+
+#### Configuration
+1. Copy the example environment file:
+```bash
+cp example.env .env
+```
+2. Edit the `.env` file with your configuration:
+```bash
+# Database Configuration
+DB_HOST="localhost"
+DB_PORT="3306"
+DB_NAME="bug_tracking_system"
+DB_USERNAME="your_username"
+DB_PASSWORD="your_secure_password"
+
+# Application Settings
+APP_NAME="Bug Tracking System"
+APP_URL="http://your-domain.com"
+APP_ENV="production"
 ```
 
 ### 4. File Permissions
-Ensure the `uploads/` directory is writable:
+Ensure the required directories are writable:
 ```bash
 chmod 755 uploads/
+chmod 755 logs/
+chmod 644 .env
 ```
 
 ### 5. Web Server Configuration
