@@ -1,19 +1,23 @@
 <?php
 /**
- * Database Configuration
+ * Database Configuration Example
  * 
- * Loads configuration from environment variables for security
+ * Copy this file to config.php and update the values according to your environment.
+ * Never commit the actual config.php file with real credentials to version control.
  */
-
-require_once __DIR__ . DIRECTORY_SEPARATOR . 'Environment.php';
-
-// Load environment configuration
-Environment::load();
 
 /**
  * Database connection class with improved security and error handling
  */
 class DatabaseConnection extends mysqli {
+    // Database configuration - Update these values
+    protected $DBLOCATION = "localhost";
+    protected $DBUSER     = "your_username";
+    protected $DBPASS     = "your_password";
+    protected $DBNAME     = "your_database";
+    protected $DBPORT     = 3306;
+    protected $DBCHARSET  = "utf8mb4";
+    
     private $mysqli;
     private $isConnected = false;
     
@@ -21,20 +25,17 @@ class DatabaseConnection extends mysqli {
      * Constructor - Initialize database connection
      */
     public function __construct() {
-        // Get database configuration from environment
-        $dbConfig = Environment::getDatabaseConfig();
-        
         try {
             $this->mysqli = new mysqli(
-                $dbConfig['host'],
-                $dbConfig['username'],
-                $dbConfig['password'],
-                $dbConfig['database'],
-                $dbConfig['port']
+                $this->DBLOCATION,
+                $this->DBUSER,
+                $this->DBPASS,
+                $this->DBNAME,
+                $this->DBPORT
             );
             
             // Set charset
-            $this->mysqli->set_charset($dbConfig['charset']);
+            $this->mysqli->set_charset($this->DBCHARSET);
             
             // Check connection
             if ($this->mysqli->connect_error) {
@@ -99,36 +100,22 @@ if (!$connect) {
     die("Database connection failed. Please check your configuration.");
 }
 
-// Get application configuration
-$appConfig = Environment::getAppConfig();
-$securityConfig = Environment::getSecurityConfig();
-$uploadConfig = Environment::getUploadConfig();
-
 // Set timezone
-date_default_timezone_set($appConfig['timezone']);
+date_default_timezone_set('UTC');
 
-// Error reporting based on environment
-if ($appConfig['debug']) {
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
-} else {
-    error_reporting(0);
-    ini_set('display_errors', 0);
-}
+// Error reporting (disable in production)
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-// Session configuration for security
-ini_set('session.cookie_httponly', $securityConfig['session_http_only'] ? 1 : 0);
+// Session configuration
+ini_set('session.cookie_httponly', 1);
 ini_set('session.use_only_cookies', 1);
-ini_set('session.cookie_secure', $securityConfig['session_secure'] ? 1 : 0);
-ini_set('session.cookie_samesite', $securityConfig['session_same_site']);
-ini_set('session.gc_maxlifetime', $securityConfig['session_lifetime']);
+ini_set('session.cookie_secure', 1);
 
 // Application constants
-define('APP_NAME', $appConfig['name']);
-define('APP_VERSION', $appConfig['version']);
-define('APP_ENV', $appConfig['environment']);
-define('APP_DEBUG', $appConfig['debug']);
-define('UPLOAD_MAX_SIZE', $uploadConfig['max_size']);
-define('ALLOWED_FILE_TYPES', $uploadConfig['allowed_types']);
+define('APP_NAME', 'Bug Tracking System');
+define('APP_VERSION', '1.2.0');
+define('UPLOAD_MAX_SIZE', 5 * 1024 * 1024); // 5MB
+define('ALLOWED_FILE_TYPES', ['jpg', 'jpeg', 'png', 'gif', 'pdf', 'doc', 'docx', 'txt']);
 
 ?>
